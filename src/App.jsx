@@ -42,7 +42,7 @@ function App() {
 
         /> */}
 
-        <DropdownOne
+        {/* <DropdownOne
           id="2"
           optionVisbility={optionVisbility}
           setOptionVisbility={setOptionVisbility}
@@ -73,7 +73,7 @@ function App() {
           optionList={data3}
           onMount={(selectedValue,data)=>{
           }}
-        /><br/>
+        /><br/> */}
         
        
         {/*  
