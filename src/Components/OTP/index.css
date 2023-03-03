@@ -1,23 +1,31 @@
 .digit-group input {
-	width: 30px;
+	width: 50px;
 	height: 50px;
-	background-color: #18182a;
-	border: none;
+	border: solid 1px #bdbdbd;
+	border-radius: 8px;
+	text-align: center;
+	margin: 20px 20px 20px 0px;
 	line-height: 50px;
 	text-align: center;
 	font-size: 24px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: 200;
-	color: white;
-	margin: 0 2px;
+	color: black;
+	overflow: visible;
+	padding: 1px 2px;
+
+	
 	}
-	.digit-group .splitter {
-	padding: 0 5px;
-	color: white;
-	font-size: 24px;
-	}
-	.prompt {
-	margin-bottom: 20px;
-	font-size: 20px;
-	color: white;
-	}
+	input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.errorInputBox{
+	border: 1px solid red !important;
+}

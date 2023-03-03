@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       {/* <OTP/> */}
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div >
         {/* <DropdownOne
           id="1"
           dropDownValue={dropDownValue}
@@ -76,14 +76,14 @@ function App() {
         /><br/> */}
         
        
-        {/*  
-      <OTP/>  */}
+         
+      <OTP otp={'1234'}/> 
       </div>
       {/* <div>
     <FileUpload/> 
     <FileUpload/> 
     <FileUpload/>  */}
-    <FileUpload/> 
+    {/* <FileUpload/>  */}
 
       {/* </div> */}
     </>
