@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./index.css";
 
 const OTP = ({ otp }) => {
-  const [confirmOtp, setconfirmOtp] = useState("");
+  const [userOtp, ] = useState({});
   const [otpCheck, setotpCheck] = useState(false);
 
   const handleKeyDown = (e) => {
@@ -20,20 +20,26 @@ const OTP = ({ otp }) => {
   };
 
   const handleonChange = (e) => {
-    let otp1 = "";
-    otp1 += confirmOtp + e.currentTarget.value;
-    setconfirmOtp(otp1);
+    let enteredOtp = userOtp;
+    enteredOtp[e.currentTarget.name] = e.currentTarget.value.length>1?e.currentTarget.value[1]:e.currentTarget.value;
+    console.log('enteredOtp',Object.values(enteredOtp).join(""));       
+
     if (e.currentTarget.nextElementSibling) {
       if (e.currentTarget.value !== "") {
         e.currentTarget.nextElementSibling.focus();
       }
     } else {
-      if (confirmOtp === otp) {
-        // alert("Otp");
-      } else {
-        // console.log(confirmOtp);
-        setotpCheck(true);
-      }
+      
+        if (Object.values(enteredOtp).join("") === otp) {
+          console.log("Sign In Successfully");
+          console.log(userOtp)
+          console.log('enteredOtp',Object.values(enteredOtp).join(""));
+        } else {
+          setotpCheck(true);
+          console.log(userOtp)
+          console.log('enteredOtp',Object.values(enteredOtp).join(""));
+        }
+       
     }
     if (e.currentTarget.value !== "" && e.currentTarget.value.length !== 1) {
       let checkVal = "";
@@ -44,7 +50,7 @@ const OTP = ({ otp }) => {
 
   return (
     <div style={{ marginLeft: "10px" }}>
-      <div>
+      <div style={{ display: "flex" }}>
         <form
           method="get"
           className="digit-group"
@@ -52,42 +58,19 @@ const OTP = ({ otp }) => {
           data-autosubmit="false"
           autoComplete="off"
         >
-          <input
-            className={otpCheck ? "errorInputBox" : ""}
-            type="number"
-            id="digit-1"
-            name="digit-1"
-            maxLength={1}
-            onChange={(e) => handleonChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-
-          <input
-            className={otpCheck ? "errorInputBox" : ""}
-            type="number"
-            id="digit2"
-            name="digit-2"
-            maxLength={1}
-            onChange={(e) => handleonChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-          <input
-            className={otpCheck ? "errorInputBox" : ""}
-            type="number"
-            id="digit-3"
-            name="digit-3"
-            maxLength={1}
-            onChange={(e) => handleonChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-          <input
-            className={otpCheck ? "errorInputBox" : ""}
-            type="number"
-            id="digit-4"
-            name="digit-4"
-            onChange={(e) => handleonChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
+          {Array(4)
+            .fill()
+            .map((elem, index) => (
+              <input
+                key={index}
+                className={otpCheck ? "errorInputBox" : ""}
+                type="number"
+                name={`digit-${index}`}
+                maxLength={1}
+                onChange={(e) => handleonChange(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
+              />
+            ))}
         </form>
       </div>
       <div>{otpCheck && <p style={{ color: "red" }}>Invalid Otp.</p>}</div>
