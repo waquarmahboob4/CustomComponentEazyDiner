@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./index.css";
 
 const OTP = ({ otp }) => {
-  const [userOtp, ] = useState({});
+  const [userOtp] = useState({});
   const [otpCheck, setotpCheck] = useState(false);
 
   const handleKeyDown = (e) => {
@@ -17,34 +17,44 @@ const OTP = ({ otp }) => {
     ) {
       e.currentTarget.previousElementSibling.focus();
     }
+
+    ["e", "E", "+", "-"].includes(e.key) && e.preventDefault();
   };
 
   const handleonChange = (e) => {
     let enteredOtp = userOtp;
-    enteredOtp[e.currentTarget.name] = e.currentTarget.value.length>1?e.currentTarget.value[1]:e.currentTarget.value;
-    console.log('enteredOtp',Object.values(enteredOtp).join(""));       
+    enteredOtp[e.currentTarget.name] =
+      e.currentTarget.value.length > 1
+        ? e.currentTarget.value[1]
+        : e.currentTarget.value;
+    console.log("enteredOtp", Object.values(enteredOtp).join(""));
 
     if (e.currentTarget.nextElementSibling) {
       if (e.currentTarget.value !== "") {
         e.currentTarget.nextElementSibling.focus();
       }
-    } else {
-      
-        if (Object.values(enteredOtp).join("") === otp) {
-          console.log("Sign In Successfully");
-          console.log(userOtp)
-          console.log('enteredOtp',Object.values(enteredOtp).join(""));
-        } else {
-          setotpCheck(true);
-          console.log(userOtp)
-          console.log('enteredOtp',Object.values(enteredOtp).join(""));
-        }
-       
+    }
+
+    if (
+      e.currentTarget.value !== "" &&
+      Object.values(enteredOtp).join("").length === 4
+    ) {
+      if (Object.values(enteredOtp).join("") === otp) {
+        console.log("Sign In Successfully");
+        console.log(userOtp);
+        console.log("enteredOtp", Object.values(enteredOtp).join(""));
+      } else {
+        setotpCheck(true);
+        console.log(userOtp);
+        console.log("enteredOtp", Object.values(enteredOtp).join(""));
+      }
     }
     if (e.currentTarget.value !== "" && e.currentTarget.value.length !== 1) {
       let checkVal = "";
       checkVal += e.currentTarget.value;
       e.currentTarget.value = checkVal[1];
+    } else if (e.currentTarget.value.length === 0) {
+      setotpCheck(false);
     }
   };
 
